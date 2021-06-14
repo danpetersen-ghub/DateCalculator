@@ -1,49 +1,39 @@
 /*
+_______________________________
 
 TESTING AND PLAYING
+_______________________________
 
 */
-
 
 //get Elements
 var textOutput = document.getElementById("output");
 var userDate = document.getElementById("input_date").value;
 var dateToday = document.getElementById("DateToday");
 
-//global declaration
+//Global declaration
 var Now = new Date();
-//var userDate1 = new Date(userDate);
 var JSoutput;
-dateToday.innerHTML = Now;
-let diffInDays;
-
-
-
-
+var diffInDays;
 
 
 //Functions
-
 showDateToday = (Now) => {dateToday.innerHTML = Now;}
 
 logDates = (Now) => {    
-    console.log(`date today is: ${ Now.getDate() }/${ Now.getMonth() +1 }/${ Now.getFullYear() }`);
+    console.log(`Small date today is: ${ Now.getDate() }/${ Now.getMonth() +1 }/${ Now.getFullYear() }`);
     console.log(`Full date today is:  ${ Now }`) ;
 }
 
-
-
-userDate_Format = (userDate) => {
-    
-    console.log(`date user put in is: ${ userDate }`);
-    console.log(`Full date user put in is:  ${new Date (userDate)}`) ;
-
+userDate_log = (userDate) => {
+    console.log(`Input date user put in is: ${ userDate }`);
+    console.log(`Full date user put in is:  ${ userDate }`) ;
 }
-
 
  date_Diff_Calc = (Now, userDate) => {
     let NowMilli = Now.getTime();
     let userDateMilli = userDate.getTime();
+    let diffInDays;
 
     if (Now === NaN || userDate === NaN) {
         var NowNum = Number(Now);
@@ -55,28 +45,36 @@ userDate_Format = (userDate) => {
         alert('Date Selected must be ion the future!')
     }
 
-    let diffMili = userDateMilli -NowMilli;
-    return diffInDays = (diffMili * 1000) * 60 * 60 * 24;   
+    let diffMili = userDateMilli - NowMilli;
+    diffInDays = (diffMili * 1000) * 60 * 60 * 24;
+    console.log(diffInDays);
+    return DisplayOutput(diffInDays);  
 
  }
+ 
+ userDateTransformation = (userDate) => {
+    userDate = new Date(userDate);
+ }
 
-//*/
-
-
-//RESULT
-function DisplayOutput() {
-    console.log(JSoutput);
+function DisplayOutput(diffInDays) {
+    
+    JSoutput = diffInDays;
+    //console.log(JSoutput);
     textOutput.innerHTML = JSoutput;
 }
 
 
 // /* INIT FUNC
-//ON Load
+//ON PAGE LOAD
 showDateToday(Now);
 logDates(Now);
 
-//Event
+
+//Events
 let input = document.getElementById("input_date").addEventListener("change", function() {
-    DisplayOutput(diffInDays)
+    userDate_log(userDate);
+    userDateTransformation(userDate);
+    date_Diff_Calc(Now, userDate);
+    DisplayOutput(diffInDays);
 }
 );
