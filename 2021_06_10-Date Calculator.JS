@@ -5,7 +5,7 @@ TESTING AND PLAYING
 */
 
 
-//get elements
+//get Elements
 var textOutput = document.getElementById("output");
 var userDate = document.getElementById("input_date").value;
 var dateToday = document.getElementById("DateToday");
@@ -15,75 +15,47 @@ var Now = new Date();
 //var userDate1 = new Date(userDate);
 var JSoutput;
 dateToday.innerHTML = Now;
+let diffInDays;
 
 
-// VERRSION 2
-/* Event
-let input = document.getElementById("input_date").addEventListener("change", function() {
-    if (Now === NaN || userDate1 === NaN) {
-        var NowNum = Number(Now);
-        var userdateNum = Number(userDate1);
-       }
-     //
-     console.log(Now + userDate)   
-   // 
-   textOutput.innerHTML =  userDate1 - Now;
-}
-);
-// */
 
-// /* VERRSION 1
-//Event
-let input = document.getElementById("input_date").addEventListener("change", function(Now) {
-    date_format();
-    //inputcalc();
-    //DisplayOutput()
-    console.log(`date input is: ${ userDate }`);
-    date_Diff_Calc();
-    console.log(`Difference in days is: ${ diffInDays }`);
-}
-);
+
 
 
 //Functions
 
-function date_format(Now) {
-    var day = this.Now.getDate();
-    var month = this.Now.getMonth();
-    var year = this.Now.getFullYear();
-    var Now = `${ year  }-${ month }-${ day }`
-    console.log(`date today is: ${ Now }`);
-}
- 
-function inputcalc(Now, userDate) {
-   if (Now === NaN || userDate === NaN) {
-    var NowNum = Number(Now);
-    var userDateNum = Number(userDate);
-   } 
-   var  date_diff =  Now - userDate;
-    console.log(`calculated date is ${ date_diff }`);
-    if (date_diff < 0) { 
-         alert("please enter date in the furture");
-    }
+showDateToday = (Now) => {dateToday.innerHTML = Now;}
+
+logDates = (Now) => {    
+    console.log(`date today is: ${ Now.getDate() }/${ Now.getMonth() +1 }/${ Now.getFullYear() }`);
+    console.log(`Full date today is:  ${ Now }`) ;
 }
 
+
+
+userDate_Format = (userDate) => {
+    
+    console.log(`date user put in is: ${ userDate }`);
+    console.log(`Full date user put in is:  ${new Date (userDate)}`) ;
+
+}
+
+
  date_Diff_Calc = (Now, userDate) => {
+    let NowMilli = Now.getTime();
+    let userDateMilli = userDate.getTime();
+
     if (Now === NaN || userDate === NaN) {
         var NowNum = Number(Now);
         var userDateNum = Number(userDate);
        } 
-    var nowMili = Date.parse(Now);
-    console.log(nowMili);
-    var userDateMili = Date.parse(userDate);
-    console.log(userDateMili);
 
-    if (userDateMili < nowMili) {
+    if (userDateMilli < NowMilli) {
         console.error('Date input must be in the future.')
         alert('Date Selected must be ion the future.')
     }
 
-    diffMili = userDateMili - nowMili;
-    
+    let diffMili = userDateMilli -NowMilli;
     return diffInDays = (diffMili * 1000) * 60 * 60 * 24;   
 
  }
@@ -96,3 +68,15 @@ function DisplayOutput() {
     console.log(JSoutput);
     textOutput.innerHTML = JSoutput;
 }
+
+
+// /* INIT FUNC
+//ON Load
+showDateToday(Now);
+logDates(Now);
+
+//Event
+let input = document.getElementById("input_date").addEventListener("change", function() {
+    DisplayOutput(diffInDays)
+}
+);
