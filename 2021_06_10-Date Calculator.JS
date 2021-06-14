@@ -51,8 +51,8 @@ userDate_Format = (userDate) => {
        } 
 
     if (userDateMilli < NowMilli) {
-        console.error('Date input must be in the future.')
-        alert('Date Selected must be ion the future.')
+        console.error('Date input must be in the future!')
+        alert('Date Selected must be ion the future!')
     }
 
     let diffMili = userDateMilli -NowMilli;
