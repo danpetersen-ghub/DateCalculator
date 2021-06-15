@@ -8,7 +8,6 @@ _______________________________
 
 //get Elements
 var textOutput = document.getElementById("output");
-var userDate = document.getElementById("input_date").value;
 var dateToday = document.getElementById("DateToday");
 
 //Global declaration
@@ -18,16 +17,11 @@ var diffInDays;
 
 
 //Functions
-showDateToday = (Now) => {dateToday.innerHTML = Now;}
+showDateToday = (date) => {dateToday.innerHTML = date;}
 
-logDates = (Now) => {    
-    console.log(`Small date today is: ${ Now.getDate() }/${ Now.getMonth() +1 }/${ Now.getFullYear() }`);
-    console.log(`Full date today is:  ${ Now }`) ;
-}
-
-userDate_log = (userDate) => {
-    console.log(`Input date user put in is: ${ userDate }`);
-    console.log(`Full date user put in is:  ${ userDate }`) ;
+logDates = (date) => {    
+    console.log(`Small date is: ${ date.getDate() }/${ date.getMonth() +1 }/${ date.getFullYear() }`);
+    console.log(`Full date is:  ${ date }`) ;
 }
 
  date_Diff_Calc = (Now, userDate) => {
@@ -52,9 +46,11 @@ userDate_log = (userDate) => {
 
  }
  
- userDateTransformation = (userDate) => {
-    userDate = new Date(userDate);
- }
+ dateTransformation = (date) => {
+    date = new Date(date);
+   logDates(date);
+   return date;
+ } 
 
 function DisplayOutput(diffInDays) {
     
@@ -72,9 +68,13 @@ logDates(Now);
 
 //Events
 let input = document.getElementById("input_date").addEventListener("change", function() {
-    userDate_log(userDate);
-    userDateTransformation(userDate);
+    var userDate = document.getElementById("input_date").value;
+    
+    dateTransformation(userDate);
+    /*
+    logDates(userDate);
     date_Diff_Calc(Now, userDate);
-    DisplayOutput(diffInDays);
+    DisplayOutput(diffInDays); 
+    */
 }
 );
